@@ -1,1 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NOLIDO STORE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* Reset and basics */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #0b0b0b;
+      color: #e0e0e0;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+    h1 {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 3.2rem;
+      margin-bottom: 40px;
+      user-select: none;
+      text-align: center;
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(110, 45, 150, 0.9);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
 
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .item-card {
+      background: linear-gradient(145deg, #17171a, #0f0f11);
+      border-radius: 16px;
+      box-shadow:
+        0 4px 6px rgba(60, 0, 100, 0.7),
+        inset 0 0 15px #3b0070;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease;
+      position: relative;
+    }
+    .item-card:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 12px 20px rgba(110, 45, 150, 0.8),
+        inset 0 0 25px #6e2d96;
+      cursor: pointer;
+      z-index: 3;
+    }
+
+    /* Image styling inside item card */
+    .item-image {
+      width: 100%;
+      max-width: 280px;
+      height: 320px;
+      border-radius: 16px;
+      object-fit: cover;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 16px rgba(110, 45, 150, 0.5);
+      background: #1a1a1a;
+    }
+
+    .price-tag {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #d6a8ff;
+      margin-bottom: 24px;
+      text-shadow: 0 0 6px #9955ffbb;
+      user-select: text;
+    }
+
+    .btn-buy {
+      background: linear-gradient(135deg, #5e21ca, #a84fff);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.25rem;
+      padding: 16px 28px;
+      width: 100%;
+      max-width: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 6px 18px rgba(110, 45, 150, 0.6);
+      transition: background 0.3s ease, transform 0.25s ease;
+      user-select: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-buy .material-icons {
+      font-size: 24px;
+      transition: transform 0.3s ease;
+      will-change: transform;
+    }
+    .btn-buy:hover {
+      background: linear-gradient(135deg, #a84fff, #5e21ca);
+      box-shadow: 0 10px 30px rgba(168, 79, 255, 0.9);
+      transform: translateY(-3px) scale(1.05);
+    }
+    .btn-buy:hover .material-icons {
+      transform: rotate(15deg) scale(1.2);
+    }
+    .btn-buy:active {
+      transform: scale(0.95);
+      box-shadow: 0 4px 8px rgba(110, 45, 150, 0.8);
+    }
+    .btn-buy:focus-visible {
+      outline: 3px solid #bb99ff;
+      outline-offset: 3px;
+    }
+
+    footer {
+      margin-top: 48px;
+      padding: 16px 12px;
+      font-size: 0.9rem;
+      color: #888;
+      text-align: center;
+      user-select: none;
+      border-top: 1px solid #222;
+      width: 100%;
+      max-width: 1200px;
+    }
+  </style>
+</head>
+<body>
+  <h1>NOLIDO STORE</h1>
+  <main class="container" role="list" aria-label="Catálogo de roupas apenas com valores">
+    <article class="item-card" role="listitem" aria-label="Item com preço R$ 79,90">
+      <img class="item-image" src="https://placehold.co/280x320?text=Camisa+1+Preto" alt="Camisa preta moderna estilosa" />
+      <div class="price-tag">R$ 79,90</div>
+      <button class="btn-buy" aria-label="Comprar agora por setenta e nove reais e noventa centavos" data-price="79,90">
+        Comprar Agora
+        <span class="material-icons" aria-hidden="true">shopping_cart</span>
+      </button>
+    </article>
+    <article class="item-card" role="listitem" aria-label="Item com preço R$ 120,00">
+      <img class="item-image" src="https://placehold.co/280x320?text=Camisa+2+Branca" alt="Camisa branca elegante" />
+      <div class="price-tag">R$ 120,00</div>
+      <button class="btn-buy" aria-label="Comprar agora por cento e vinte reais" data-price="120,00">
+        Comprar Agora
+        <span class="material-icons" aria-hidden="true">shopping_cart</span>
+      </button>
+    </article>
+    <article class="item-card" role="listitem" aria-label="Item com preço R$ 59,50">
+      <img class="item-image" src="https://placehold.co/280x320?text=Camisa+3+Azul" alt="Camisa azul moderna casual" />
+      <div class="price-tag">R$ 59,50</div>
+      <button class="btn-buy" aria-label="Comprar agora por cinquenta e nove reais e cinquenta centavos" data-price="59,50">
+        Comprar Agora
+        <span class="material-icons" aria-hidden="true">shopping_cart</span>
+      </button>
+    </article>
+    <article class="item-card" role="listitem" aria-label="Item com preço R$ 150,00">
+      <img class="item-image" src="https://placehold.co/280x320?text=Camisa+4+Vermelha" alt="Camisa vermelha vibrante" />
+      <div class="price-tag">R$ 150,00</div>
+      <button class="btn-buy" aria-label="Comprar agora por cento e cinquenta reais" data-price="150,00">
+        Comprar Agora
+        <span class="material-icons" aria-hidden="true">shopping_cart</span>
+      </button>
+    </article>
+    <article class="item-card" role="listitem" aria-label="Item com preço R$ 199,90">
+      <img class="item-image" src="https://placehold.co/280x320?text=Camisa+5+Verde" alt="Camisa verde estilosa" />
+      <div class="price-tag">R$ 199,90</div>
+      <button class="btn-buy" aria-label="Comprar agora por cento e noventa e nove reais e noventa centavos" data-price="199,90">
+        Comprar Agora
+        <span class="material-icons" aria-hidden="true">shopping_cart</span>
+      </button>
+    </article>
+    <article class="item-card" role="listitem" aria-label="Item com preço R$ 85,00">
+      <img class="item-image" src="https://placehold.co/280x320?text=Camisa+6+Cinza" alt="Camisa cinza casual" />
+      <div class="price-tag">R$ 85,00</div>
+      <button class="btn-buy" aria-label="Comprar agora por oitenta e cinco reais" data-price="85,00">
+        Comprar Agora
+        <span class="material-icons" aria-hidden="true">shopping_cart</span>
+      </button>
+    </article>
+  </main>
+
+  <footer>
+    &copy; 2025 Max Odilon. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    // WhatsApp number replaced as requested
+    const whatsappNumber = '94981263664';
+
+    function formatMessage(price) {
+      return encodeURIComponent(`Olá, tenho interesse na roupa com preço de R$${price}. Podemos conversar?`);
+    }
+
+    document.querySelectorAll('.btn-buy').forEach(button => {
+      button.addEventListener('click', () => {
+        const price = button.getAttribute('data-price');
+        const message = formatMessage(price);
+        const url = `https://wa.me/${whatsappNumber}?text=${message}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
+    });
+  </script>
+</body>
+  </html>
+  
