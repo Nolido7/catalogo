@@ -23,19 +23,55 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 24px 16px;
+      padding: 80px 16px 80px; /* space for fixed header and footer */
+      position: relative;
     }
-    h1 {
+    /* Fixed header with logo and store name */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 24px;
+      z-index: 1000;
+      backdrop-filter: saturate(180%) blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    /* Logo container and styling */
+    .logo-container {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(110, 45, 150, 0.8);
+      border: 2px solid #6e2d96;
+      background: #1a1a1a;
+    }
+    .logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Store name styling next to logo */
+    .store-name {
       font-family: 'Raleway', sans-serif;
       font-weight: 800;
-      font-size: 3.2rem;
-      margin-bottom: 40px;
+      font-size: 1.8rem;
+      color: #d6a8ff;
       user-select: none;
-      text-align: center;
-      color: #ffffff;
-      text-shadow: 0 0 12px rgba(110, 45, 150, 0.9);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      text-shadow: 0 0 6px #9955ffbb;
+      white-space: nowrap;
+    }
+    h1 {
+      display: none; /* Hide original h1 because we have fixed header */
     }
 
     .container {
@@ -78,6 +114,16 @@
       margin-bottom: 20px;
       box-shadow: 0 8px 16px rgba(110, 45, 150, 0.5);
       background: #1a1a1a;
+    }
+
+    .code-tag {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #a0a0ff;
+      margin-bottom: 12px;
+      text-shadow: 0 0 6px #7070ffaa;
+      user-select: text;
+      letter-spacing: 0.05em;
     }
 
     .price-tag {
@@ -132,66 +178,85 @@
       outline-offset: 3px;
     }
 
+    /* Fixed transparent black footer */
     footer {
-      margin-top: 48px;
-      padding: 16px 12px;
-      font-size: 0.9rem;
-      color: #888;
-      text-align: center;
-      user-select: none;
-      border-top: 1px solid #222;
+      position: fixed;
+      bottom: 0;
+      left: 0;
       width: 100%;
-      max-width: 1200px;
+      height: 60px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #888;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      user-select: none;
+      backdrop-filter: saturate(180%) blur(10px);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      z-index: 1000;
     }
   </style>
 </head>
 <body>
-  <h1>NOLIDO STORE</h1>
-  <main class="container" role="list" aria-label="Catálogo de roupas apenas com valores">
-    <article class="item-card" role="listitem" aria-label="Item com código C001 e preço R$ 79,90">
-      <img class="item-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a387a3fd-11ac-44c0-9074-dfc7c0df9f09.png" alt="Camisa preta moderna estilosa" />
-      <div class="price-tag">R$ 79,90</div>
-      <button class="btn-buy" aria-label="Comprar agora por setenta e nove reais e noventa centavos" data-price="79,90" data-code="C001">
+  <header role="banner" aria-label="Cabeçalho do site Nolido Store">
+    <div class="logo-container">
+      <img src="https://i.ibb.co/sdRqhX9X/Picsart-25-06-12-18-50-16-225.webp" alt="Logo NOLIDO STORE" />
+    </div>
+    <div class="store-name">NOLIDO STORE</div>
+  </header>
+
+  <main class="container" role="main" aria-label="Catálogo de roupas apenas com valores">
+    <article class="item-card" role="listitem" aria-label="Item com código C001 e preço R$ 60,00">
+      <img class="item-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7921b1ae-9ba6-487e-84d7-81081a6ca51b.png" alt="Camisa preta moderna estilosa" />
+      <div class="code-tag">Código: C001</div>
+      <div class="price-tag">R$ 60,00</div>
+      <button class="btn-buy" aria-label="Comprar agora por setenta e nove reais e noventa centavos" data-price="60,00" data-code="C001">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
-    <article class="item-card" role="listitem" aria-label="Item com código C002 e preço R$ 120,00">
-      <img class="item-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7a7e604f-5f4f-4b65-aba3-b8ee1f01f2f4.png" alt="Camisa branca elegante" />
-      <div class="price-tag">R$ 120,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por cento e vinte reais" data-price="120,00" data-code="C002">
+    <article class="item-card" role="listitem" aria-label="Item com código C002 e preço R$ 60,00">
+      <img class="item-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/067c67aa-08b8-43ed-a94c-b72ea5189761.png" alt="Camisa branca elegante" />
+      <div class="code-tag">Código: C002</div>
+      <div class="price-tag">R$ 60,00</div>
+      <button class="btn-buy" aria-label="Comprar agora por cento e vinte reais" data-price="60,00" data-code="C002">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
-    <article class="item-card" role="listitem" aria-label="Item com código C003 e preço R$ 59,50">
-      <img class="item-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ecc7574b-f6ae-4672-9b40-57f7b46daa27.png" alt="Camisa azul moderna casual" />
-      <div class="price-tag">R$ 59,50</div>
-      <button class="btn-buy" aria-label="Comprar agora por cinquenta e nove reais e cinquenta centavos" data-price="59,50" data-code="C003">
+    <article class="item-card" role="listitem" aria-label="Item com código C003 e preço R$ 60,00">
+      <img class="item-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0a7366ed-701e-4112-96bc-46ee22a0ad28.png" alt="Camisa azul moderna casual" />
+      <div class="code-tag">Código: C003</div>
+      <div class="price-tag">R$ 60,00</div>
+      <button class="btn-buy" aria-label="Comprar agora por cinquenta e nove reais e cinquenta centavos" data-price="60,00" data-code="C003">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
-    <article class="item-card" role="listitem" aria-label="Item com código C004 e preço R$ 150,00">
-      <img class="item-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c19b1c1e-b058-4f74-803b-5860420fdd20.png" alt="Camisa vermelha vibrante" />
-      <div class="price-tag">R$ 150,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por cento e cinquenta reais" data-price="150,00" data-code="C004">
+    <article class="item-card" role="listitem" aria-label="Item com código C004 e preço R$ 60,00">
+      <img class="item-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/261b369c-625a-4f57-80e5-8125e1b34c18.png" alt="Camisa vermelha vibrante" />
+      <div class="code-tag">Código: C004</div>
+      <div class="price-tag">R$ 60,00</div>
+      <button class="btn-buy" aria-label="Comprar agora por cento e cinquenta reais" data-price="60,00" data-code="C004">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
-    <article class="item-card" role="listitem" aria-label="Item com código C005 e preço R$ 199,90">
-      <img class="item-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f0b693d4-9463-4a20-abe5-fa973bbff7b8.png" alt="Camisa verde estilosa" />
-      <div class="price-tag">R$ 199,90</div>
-      <button class="btn-buy" aria-label="Comprar agora por cento e noventa e nove reais e noventa centavos" data-price="199,90" data-code="C005">
+    <article class="item-card" role="listitem" aria-label="Item com código C005 e preço R$ 60,00">
+      <img class="item-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/da757b82-123f-4dd4-83c7-a01d0eb32d3c.png" alt="Camisa verde estilosa" />
+      <div class="code-tag">Código: C005</div>
+      <div class="price-tag">R$ 60,00</div>
+      <button class="btn-buy" aria-label="Comprar agora por cento e noventa e nove reais e noventa centavos" data-price="60,00" data-code="C005">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
-    <article class="item-card" role="listitem" aria-label="Item com código C006 e preço R$ 85,00">
-      <img class="item-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/58adc7de-b9d7-4b4c-aa88-c49809dab9e8.png" alt="Camisa cinza casual" />
-      <div class="price-tag">R$ 85,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por oitenta e cinco reais" data-price="85,00" data-code="C006">
+    <article class="item-card" role="listitem" aria-label="Item com código C006 e preço R$ 60,00">
+      <img class="item-image" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8f05fd36-a472-4c95-80a3-1068d6a4f43f.png" alt="Camisa cinza casual" />
+      <div class="code-tag">Código: C006</div>
+      <div class="price-tag">R$ 60,00</div>
+      <button class="btn-buy" aria-label="Comprar agora por oitenta e cinco reais" data-price="60,00" data-code="C006">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
@@ -221,4 +286,3 @@
   </script>
 </body>
 </html>
-
