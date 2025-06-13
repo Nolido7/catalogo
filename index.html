@@ -25,6 +25,7 @@
       align-items: center;
       padding: 80px 16px 80px; /* space for fixed header and footer */
       position: relative;
+      overflow-x: hidden;
     }
     /* Fixed header with logo and store name */
     header {
@@ -114,6 +115,11 @@
       margin-bottom: 20px;
       box-shadow: 0 8px 16px rgba(110, 45, 150, 0.5);
       background: #1a1a1a;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .item-image:hover {
+      transform: scale(1.05);
     }
 
     .code-tag {
@@ -196,6 +202,88 @@
       border-top: 1px solid rgba(255,255,255,0.1);
       z-index: 1000;
     }
+
+    /* WhatsApp floating button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 80px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      background-color: #25D366;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.6);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      z-index: 1100;
+    }
+    .whatsapp-float:hover {
+      background-color: #1ebe57;
+      transform: scale(1.1);
+    }
+    .whatsapp-float img {
+      width: 32px;
+      height: 32px;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Modal styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1200;
+      padding: 16px;
+    }
+    .modal-overlay.show {
+      display: flex;
+    }
+    .modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      background: #1a1a1a;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(168, 79, 255, 0.8);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+    }
+    .modal-image {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 16px;
+      object-fit: contain;
+      box-shadow: 0 8px 16px rgba(110, 45, 150, 0.7);
+      user-select: none;
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: transparent;
+      border: none;
+      color: #d6a8ff;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      z-index: 10;
+      user-select: none;
+    }
+    .modal-close-btn:hover,
+    .modal-close-btn:focus {
+      color: #fff;
+      outline: none;
+    }
   </style>
 </head>
 <body>
@@ -208,55 +296,55 @@
 
   <main class="container" role="main" aria-label="Catálogo de roupas apenas com valores">
     <article class="item-card" role="listitem" aria-label="Item com código C001 e preço R$ 60,00">
-      <img class="item-image" src="https://i.ibb.co/SXcV05kd/Todas-as-cores-1.webp" alt="Camisa preta moderna estilosa" />
+      <img class="item-image" src="https://i.ibb.co/SXcV05kd/Todas-as-cores-1.webp" alt="Camisa preta moderna estilosa" data-code="C001" />
       <div class="code-tag">Código: C001</div>
       <div class="price-tag">R$ 60,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por setenta e nove reais e noventa centavos" data-price="60,00" data-code="C001">
+      <button class="btn-buy" aria-label="Comprar agora por sessenta reais" data-price="60,00" data-code="C001">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
     <article class="item-card" role="listitem" aria-label="Item com código C002 e preço R$ 60,00">
-      <img class="item-image" src="https://i.ibb.co/R42njv9L/Todas-as-cores.webp" alt="Camisa branca elegante" />
+      <img class="item-image" src="https://i.ibb.co/R42njv9L/Todas-as-cores.webp" alt="Camisa branca elegante" data-code="C002" />
       <div class="code-tag">Código: C002</div>
       <div class="price-tag">R$ 60,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por cento e vinte reais" data-price="60,00" data-code="C002">
+      <button class="btn-buy" aria-label="Comprar agora por sessenta reais" data-price="60,00" data-code="C002">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
     <article class="item-card" role="listitem" aria-label="Item com código C003 e preço R$ 60,00">
-      <img class="item-image" src="https://i.ibb.co/hFPwfjY1/Preto-1.webp" alt="Camisa azul moderna casual" />
+      <img class="item-image" src="https://i.ibb.co/hFPwfjY1/Preto-1.webp" alt="Camisa azul moderna casual" data-code="C003" />
       <div class="code-tag">Código: C003</div>
       <div class="price-tag">R$ 60,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por cinquenta e nove reais e cinquenta centavos" data-price="60,00" data-code="C003">
+      <button class="btn-buy" aria-label="Comprar agora por sessenta reais" data-price="60,00" data-code="C003">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
     <article class="item-card" role="listitem" aria-label="Item com código C004 e preço R$ 60,00">
-      <img class="item-image" src="https://i.ibb.co/TMgrMZYg/Todas-as-cores-3.webp" alt="Camisa vermelha vibrante" />
+      <img class="item-image" src="https://i.ibb.co/TMgrMZYg/Todas-as-cores-3.webp" alt="Camisa vermelha vibrante" data-code="C004" />
       <div class="code-tag">Código: C004</div>
       <div class="price-tag">R$ 60,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por cento e cinquenta reais" data-price="60,00" data-code="C004">
+      <button class="btn-buy" aria-label="Comprar agora por sessenta reais" data-price="60,00" data-code="C004">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
     <article class="item-card" role="listitem" aria-label="Item com código C005 e preço R$ 60,00">
-      <img class="item-image" src="https://i.ibb.co/p6Ln4WwL/Todas-as-cores-2.webp" alt="Camisa verde estilosa" />
+      <img class="item-image" src="https://i.ibb.co/p6Ln4WwL/Todas-as-cores-2.webp" alt="Camisa verde estilosa" data-code="C005" />
       <div class="code-tag">Código: C005</div>
       <div class="price-tag">R$ 60,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por cento e noventa e nove reais e noventa centavos" data-price="60,00" data-code="C005">
+      <button class="btn-buy" aria-label="Comprar agora por sessenta reais" data-price="60,00" data-code="C005">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
     <article class="item-card" role="listitem" aria-label="Item com código C006 e preço R$ 60,00">
-      <img class="item-image" src="https://i.ibb.co/67Rqw0Jf/Todas-as-cores-6.webp" alt="Camisa cinza casual" />
+      <img class="item-image" src="https://i.ibb.co/67Rqw0Jf/Todas-as-cores-6.webp" alt="Camisa cinza casual" data-code="C006" />
       <div class="code-tag">Código: C006</div>
       <div class="price-tag">R$ 60,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por oitenta e cinco reais" data-price="60,00" data-code="C006">
+      <button class="btn-buy" aria-label="Comprar agora por sessenta reais" data-price="60,00" data-code="C006">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
@@ -266,6 +354,22 @@
   <footer>
     &copy; 2025 Max Odilon. Todos os direitos reservados.
   </footer>
+
+  <!-- WhatsApp floating button -->
+  <button 
+    class="whatsapp-float" 
+    aria-label="Abrir WhatsApp para saber mais sobre produtos"
+    title="Fale conosco pelo WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Ícone do WhatsApp" />
+  </button>
+
+  <!-- Modal for image preview -->
+  <div class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+    <div class="modal-content">
+      <button class="modal-close-btn" aria-label="Fechar imagem">&times;</button>
+      <img src="" alt="" class="modal-image"/>
+    </div>
+  </div>
 
   <script>
     const whatsappNumber = '5594981263664';
@@ -283,6 +387,59 @@
         window.open(url, '_blank', 'noopener,noreferrer');
       });
     });
+
+    // WhatsApp floating button different message
+    const whatsappFloat = document.querySelector('.whatsapp-float');
+    whatsappFloat.addEventListener('click', () => {
+      const message = encodeURIComponent("*Olá Max, Quero saber mais sobre as camisas, perfumes, shorts e.t.c*");
+      const url = `https://wa.me/${whatsappNumber}?text=${message}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+
+    // Modal elements
+    const modalOverlay = document.querySelector('.modal-overlay');
+    const modalImage = document.querySelector('.modal-image');
+    const modalCloseBtn = document.querySelector('.modal-close-btn');
+
+    // Open modal with clicked image
+    document.querySelectorAll('.item-image').forEach(img => {
+      img.addEventListener('click', () => {
+        modalImage.src = img.src;
+        modalImage.alt = img.alt;
+        modalOverlay.setAttribute('aria-hidden', 'false');
+        modalOverlay.style.display = 'flex';
+        modalCloseBtn.focus();
+        // Prevent scroll on body
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // Close modal function
+    function closeModal() {
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      modalOverlay.style.display = 'none';
+      modalImage.src = '';
+      modalImage.alt = '';
+      document.body.style.overflow = '';
+    }
+
+    // Close on close button click
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    // Close on overlay click (but not on modal content)
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.getAttribute('aria-hidden') === 'false') {
+        closeModal();
+      }
+    });
   </script>
 </body>
 </html>
+
