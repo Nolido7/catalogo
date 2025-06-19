@@ -25,7 +25,6 @@
       align-items: center;
       padding: 80px 16px 80px; /* space for fixed header and footer */
       position: relative;
-      overflow-x: hidden;
     }
     /* Fixed header with logo and store name */
     header {
@@ -37,13 +36,81 @@
       background: rgba(0,0,0,0.9);
       display: flex;
       align-items: center;
-      gap: 16px;
+      justify-content: space-between;
       padding: 0 24px;
       z-index: 1000;
       backdrop-filter: saturate(180%) blur(10px);
       box-shadow: 0 2px 8px rgba(0,0,0,0.7);
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
+    
+    /* Header left side (logo and store name) */
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    /* Categories menu */
+    .categories-menu {
+      position: relative;
+    }
+    
+    .categories-btn {
+      background: transparent;
+      border: none;
+      color: #d6a8ff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .categories-btn:hover {
+      background: rgba(110, 45, 150, 0.2);
+    }
+    
+    .categories-btn .material-icons {
+      font-size: 20px;
+    }
+    
+    .categories-dropdown {
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background: rgba(30, 30, 35, 0.95);
+      border-radius: 8px;
+      padding: 8px 0;
+      min-width: 180px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      backdrop-filter: saturate(180%) blur(10px);
+      display: none;
+      z-index: 1001;
+    }
+    
+    .categories-dropdown.show {
+      display: block;
+    }
+    
+    .categories-dropdown a {
+      display: block;
+      padding: 10px 16px;
+      color: #e0e0e0;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .categories-dropdown a:hover {
+      background: rgba(110, 45, 150, 0.4);
+      color: #fff;
+    }
+
     /* Logo container and styling */
     .logo-container {
       width: 48px;
@@ -115,11 +182,6 @@
       margin-bottom: 20px;
       box-shadow: 0 8px 16px rgba(110, 45, 150, 0.5);
       background: #1a1a1a;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .item-image:hover {
-      transform: scale(1.05);
     }
 
     .code-tag {
@@ -230,216 +292,67 @@
       user-select: none;
       pointer-events: none;
     }
-
-    /* Modal styles */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1200;
-      padding: 16px;
-    }
-    .modal-overlay.show {
-      display: flex;
-    }
-    .modal-content {
-      position: relative;
-      max-width: 90vw;
-      max-height: 90vh;
-      background: #1a1a1a;
-      border-radius: 20px;
-      box-shadow: 0 0 30px rgba(168, 79, 255, 0.8);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 16px;
-    }
-    .modal-image {
-      max-width: 100%;
-      max-height: 80vh;
-      border-radius: 16px;
-      object-fit: contain;
-      box-shadow: 0 8px 16px rgba(110, 45, 150, 0.7);
-      user-select: none;
-    }
-    .modal-close-btn {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: transparent;
-      border: none;
-      color: #d6a8ff;
-      font-size: 24px;
-      cursor: pointer;
-      transition: color 0.3s ease;
-      z-index: 10;
-      user-select: none;
-    }
-    .modal-close-btn:hover,
-    .modal-close-btn:focus {
-      color: #fff;
-      outline: none;
-    }
   </style>
 </head>
 <body>
   <header role="banner" aria-label="Cabeçalho do site Nolido Store">
-    <div class="logo-container">
-      <img src="https://i.ibb.co/sdRqhX9X/Picsart-25-06-12-18-50-16-225.webp" alt="Logo NOLIDO STORE" />
+    <div class="header-left">
+      <div class="logo-container">
+        <img src="https://i.ibb.co/sdRqhX9X/Picsart-25-06-12-18-50-16-225.webp" alt="Logo NOLIDO STORE" />
+      </div>
+      <div class="store-name">NOLIDO STORE</div>
     </div>
-    <div class="store-name">NOLIDO STORE</div>
+    
+    <div class="categories-menu">
+      <button class="categories-btn">
+        <span class="material-icons">menu</span>
+        Categorias
+      </button>
+      <div class="categories-dropdown">
+        <a href="#">Camisas</a>
+        <a href="#">Shorts</a>
+        <a href="#">Bonés</a>
+        <a href="#">Perfumes</a>
+      </div>
+    </div>
   </header>
 
   <main class="container" role="main" aria-label="Catálogo de roupas apenas com valores">
     <article class="item-card" role="listitem" aria-label="Item com código C001 e preço R$ 60,00">
-      <img class="item-image" src="https://i.ibb.co/SXcV05kd/Todas-as-cores-1.webp" alt="Camisa preta moderna estilosa" data-code="C001" />
+      <img class="item-image" src="https://i.ibb.co/SXcV05kd/Todas-as-cores-1.webp" alt="Camisa preta moderna estilosa" />
       <div class="code-tag">Código: C001</div>
       <div class="price-tag">R$ 60,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por sessenta reais" data-price="60,00" data-code="C001">
+      <button class="btn-buy" aria-label="Comprar agora por setenta e nove reais e noventa centavos" data-price="60,00" data-code="C001">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
     <article class="item-card" role="listitem" aria-label="Item com código C002 e preço R$ 60,00">
-      <img class="item-image" src="https://i.ibb.co/R42njv9L/Todas-as-cores.webp" alt="Camisa branca elegante" data-code="C002" />
+      <img class="item-image" src="https://i.ibb.co/R42njv9L/Todas-as-cores.webp" alt="Camisa branca elegante" />
       <div class="code-tag">Código: C002</div>
       <div class="price-tag">R$ 60,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por sessenta reais" data-price="60,00" data-code="C002">
+      <button class="btn-buy" aria-label="Comprar agora por cento e vinte reais" data-price="60,00" data-code="C002">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
     <article class="item-card" role="listitem" aria-label="Item com código C003 e preço R$ 60,00">
-      <img class="item-image" src="https://i.ibb.co/hFPwfjY1/Preto-1.webp" alt="Camisa azul moderna casual" data-code="C003" />
+      <img class="item-image" src="https://i.ibb.co/hFPwfjY1/Preto-1.webp" alt="Camisa azul moderna casual" />
       <div class="code-tag">Código: C003</div>
       <div class="price-tag">R$ 60,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por sessenta reais" data-price="60,00" data-code="C003">
+      <button class="btn-buy" aria-label="Comprar agora por cinquenta e nove reais e cinquenta centavos" data-price="60,00" data-code="C003">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
     <article class="item-card" role="listitem" aria-label="Item com código C004 e preço R$ 60,00">
-      <img class="item-image" src="https://i.ibb.co/TMgrMZYg/Todas-as-cores-3.webp" alt="Camisa vermelha vibrante" data-code="C004" />
+      <img class="item-image" src="https://i.ibb.co/TMgrMZYg/Todas-as-cores-3.webp" alt="Camisa vermelha vibrante" />
       <div class="code-tag">Código: C004</div>
       <div class="price-tag">R$ 60,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por sessenta reais" data-price="60,00" data-code="C004">
+      <button class="btn-buy" aria-label="Comprar agora por cento e cinquenta reais" data-price="60,00" data-code="C004">
         Comprar Agora
         <span class="material-icons" aria-hidden="true">shopping_cart</span>
       </button>
     </article>
     <article class="item-card" role="listitem" aria-label="Item com código C005 e preço R$ 60,00">
-      <img class="item-image" src="https://i.ibb.co/p6Ln4WwL/Todas-as-cores-2.webp" alt="Camisa verde estilosa" data-code="C005" />
-      <div class="code-tag">Código: C005</div>
-      <div class="price-tag">R$ 60,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por sessenta reais" data-price="60,00" data-code="C005">
-        Comprar Agora
-        <span class="material-icons" aria-hidden="true">shopping_cart</span>
-      </button>
-    </article>
-    <article class="item-card" role="listitem" aria-label="Item com código C006 e preço R$ 60,00">
-      <img class="item-image" src="https://i.ibb.co/67Rqw0Jf/Todas-as-cores-6.webp" alt="Camisa cinza casual" data-code="C006" />
-      <div class="code-tag">Código: C006</div>
-      <div class="price-tag">R$ 60,00</div>
-      <button class="btn-buy" aria-label="Comprar agora por sessenta reais" data-price="60,00" data-code="C006">
-        Comprar Agora
-        <span class="material-icons" aria-hidden="true">shopping_cart</span>
-      </button>
-    </article>
-  </main>
-
-  <footer>
-    &copy; 2025 Max Odilon. Todos os direitos reservados.
-  </footer>
-
-  <!-- WhatsApp floating button -->
-  <button 
-    class="whatsapp-float" 
-    aria-label="Abrir WhatsApp para saber mais sobre produtos"
-    title="Fale conosco pelo WhatsApp">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Ícone do WhatsApp" />
-  </button>
-
-  <!-- Modal for image preview -->
-  <div class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
-    <div class="modal-content">
-      <button class="modal-close-btn" aria-label="Fechar imagem">&times;</button>
-      <img src="" alt="" class="modal-image"/>
-    </div>
-  </div>
-
-  <script>
-    const whatsappNumber = '5594981263664';
-
-    function formatMessage(price, code) {
-      return encodeURIComponent(`*Olá, tenho interesse no produto código ${code} com preço de R$${price}. Podemos conversar?*`);
-    }
-
-    document.querySelectorAll('.btn-buy').forEach(button => {
-      button.addEventListener('click', () => {
-        const price = button.getAttribute('data-price');
-        const code = button.getAttribute('data-code');
-        const message = formatMessage(price, code);
-        const url = `https://wa.me/${whatsappNumber}?text=${message}`;
-        window.open(url, '_blank', 'noopener,noreferrer');
-      });
-    });
-
-    // WhatsApp floating button different message
-    const whatsappFloat = document.querySelector('.whatsapp-float');
-    whatsappFloat.addEventListener('click', () => {
-      const message = encodeURIComponent("*Olá Max, Quero saber mais sobre as camisas, perfumes, shorts e.t.c*");
-      const url = `https://wa.me/${whatsappNumber}?text=${message}`;
-      window.open(url, '_blank', 'noopener,noreferrer');
-    });
-
-    // Modal elements
-    const modalOverlay = document.querySelector('.modal-overlay');
-    const modalImage = document.querySelector('.modal-image');
-    const modalCloseBtn = document.querySelector('.modal-close-btn');
-
-    // Open modal with clicked image
-    document.querySelectorAll('.item-image').forEach(img => {
-      img.addEventListener('click', () => {
-        modalImage.src = img.src;
-        modalImage.alt = img.alt;
-        modalOverlay.setAttribute('aria-hidden', 'false');
-        modalOverlay.style.display = 'flex';
-        modalCloseBtn.focus();
-        // Prevent scroll on body
-        document.body.style.overflow = 'hidden';
-      });
-    });
-
-    // Close modal function
-    function closeModal() {
-      modalOverlay.setAttribute('aria-hidden', 'true');
-      modalOverlay.style.display = 'none';
-      modalImage.src = '';
-      modalImage.alt = '';
-      document.body.style.overflow = '';
-    }
-
-    // Close on close button click
-    modalCloseBtn.addEventListener('click', closeModal);
-
-    // Close on overlay click (but not on modal content)
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) {
-        closeModal();
-      }
-    });
-
-    // Close on Escape key press
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modalOverlay.getAttribute('aria-hidden') === 'false') {
-        closeModal();
-      }
-    });
-  </script>
-</body>
-</html>
-
+      <img class="item-image" src="https://i.ibb.co/p
