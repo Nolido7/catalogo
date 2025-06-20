@@ -1,0 +1,341 @@
+!DOCTYPE html>
+html lang="pt-BR">
+head>
+  meta charset="UTF-8" />
+  meta name="viewport" content="width=device-width, initial-scale=1" />
+  title>NOLIDO STORE - Shorts/title>
+  link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  link href="https://fonts.googleapis.com/icon?family=material-icons" rel="stylesheet" />
+  style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0b0b0b;
+      color: #e0e0e0;
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: 80px 16px 80px;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 1000;
+      backdrop-filter: saturate(180%) blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-container {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 8px rgba(110, 45, 150, 0.8);
+      border: 2px solid #6e2d96;
+      background: #1a1a1a;
+    }
+
+    .logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .store-name {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: #d6a8ff;
+      text-shadow: 0 0 6px #9955ffbb;
+    }
+
+    .categories-menu {
+      position: relative;
+    }
+
+    .categories-btn {
+      background: rgba(110, 45, 150, 0.2);
+      border: none;
+      color: #d6a8ff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .categories-btn:hover {
+      background: rgba(110, 45, 150, 0.4);
+    }
+
+    .categories-dropdown {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      background: rgba(30, 30, 35, 0.95);
+      border-radius: 8px;
+      padding: 8px 0;
+      min-width: 180px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      backdrop-filter: saturate(180%) blur(10px);
+      display: none;
+      z-index: 1001;
+    }
+
+    .categories-dropdown.show {
+      display: block;
+    }
+
+    .category-link {
+      display: block;
+      padding: 10px 16px;
+      color: #e0e0e0;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .category-link:hover {
+      background: rgba(110, 45, 150, 0.4);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      margin: 20px auto;
+    }
+
+    .item-card {
+      background: linear-gradient(145deg, #17171a, #0f0f11);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px rgba(60, 0, 100, 0.7),
+                  inset 0 0 15px #3b0070;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .item-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 20px rgba(110, 45, 150, 0.8),
+                  inset 0 0 25px #6e2d96;
+    }
+
+    .item-image {
+      width: 100%;
+      max-width: 280px;
+      height: 320px;
+      border-radius: 16px;
+      object-fit: cover;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 16px rgba(110, 45, 150, 0.5);
+    }
+
+    .code-tag {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #a0a0ff;
+      margin-bottom: 12px;
+      text-shadow: 0 0 6px #7070ffaa;
+    }
+
+    .price-tag {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #d6a8ff;
+      margin-bottom: 24px;
+      text-shadow: 0 0 6px #9955ffbb;
+    }
+
+    .btn-buy {
+      background: linear-gradient(135deg, #5e21ca, #a84fff);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.25rem;
+      padding: 16px 28px;
+      width: 100%;
+      max-width: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 6px 18px rgba(110, 45, 150, 0.6);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-buy:hover {
+      background: linear-gradient(135deg, #a84fff, #5e21ca);
+      box-shadow: 0 10px 30px rgba(168, 79, 255, 0.9);
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #888;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      backdrop-filter: saturate(180%) blur(10px);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      z-index: 1000;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 80px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      background-color: #25D366;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 1100;
+    }
+
+    .whatsapp-float:hover {
+      background-color: #1ebe57;
+      transform: scale(1.1);
+    }
+
+    .whatsapp-float img {
+      width: 32px;
+      height: 32px;
+    }
+  /style>
+/head>
+body>
+  header>
+    div class="header-left">
+      div class="logo-container">
+        img src="https://i.ibb.co/sdRqhX9X/Picsart-25-06-12-18-50-16-225.webp" alt="NOLIDO STORE" />
+      /div>
+      div class="store-name">NOLIDO STORE/div>
+    /div>
+    
+    div class="categories-menu">
+      button class="categories-btn" id="categoriesBtn">
+        span class="material-icons">menu/span>
+        Categorias
+      /button>
+      div class="categories-dropdown" id="categoriesDropdown">
+        a href="index.html" class="category-link">Camisas/a>
+        a href="shorts.html" class="category-link">Shorts/a>
+        a href="#" class="category-link">Bonés/a>
+        a href="#" class="category-link">Perfumes/a>
+      /div>
+    /div>
+  /header>
+
+  main class="container">
+    !-- Short 1 -->
+    article class="item-card">
+      img class="item-image" src="https://i.ibb.co/4JqYKRZ/short1.webp" alt="Short Preto Básico" />
+      div class="code-tag">Código: S001/div>
+      div class="price-tag">R$ 60,00/div>
+      button class="btn-buy" data-price="60,00" data-code="S001">
+        Comprar Agora
+        span class="material-icons">shopping_cart/span>
+      /button>
+    /article>
+
+    !-- Short 2 -->
+    article class="item-card">
+      img class="item-image" src="https://i.ibb.co/NtzP2y4/short2.webp" alt="Short Azul Jeans" />
+      div class="code-tag">Código: S002/div>
+      div class="price-tag">R$ 60,00/div>
+      button class="btn-buy" data-price="60,00" data-code="S002">
+        Comprar Agora
+        span class="material-icons">shopping_cart/span>
+      /button>
+    /article>
+
+    !-- Short 3 -->
+    article class="item-card">
+      img class="item-image" src="https://i.ibb.co/6PpzkvJ/short3.webp" alt="Short Esportivo" />
+      div class="code-tag">Código: S003/div>
+      div class="price-tag">R$ 60,00/div>
+      button class="btn-buy" data-price="60,00" data-code="S003">
+        Comprar Agora
+        span class="material-icons">shopping_cart/span>
+      /button>
+    /article>
+  /main>
+
+  footer>
+    © 2025 Max Odilon. Todos os direitos reservados.
+  /footer>
+
+  a href="https://wa.me/5594981263664?text=Olá%20Max,%20Quero%20saber%20mais%20sobre%20os%20shorts" 
+     class="whatsapp-float" 
+     target="_blank">
+    img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+  /a>
+
+  script>
+    // Menu de categorias
+    const categoriesBtn = document.getElementById('categoriesBtn');
+    const categoriesDropdown = document.getElementById('categoriesDropdown');
+
+    categoriesBtn.addEventListener('click', () => {
+      categoriesDropdown.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.categories-menu')) {
+        categoriesDropdown.classList.remove('show');
+      }
+    });
+
+    // Botão de compra
+    document.querySelectorAll('.btn-buy').forEach(button => {
+      button.addEventListener('click', () => {
+        const price = button.getAttribute('data-price');
+        const code = button.getAttribute('data-code');
+        const message = encodeURIComponent(`*Olá, tenho interesse no Short código ${code} com preço de R$${price}. Podemos conversar?*`);
+        const url = `https://wa.me/5594981263664?text=${message}`;
+        window.open(url, '_blank');
+      });
+    });
+  /script>
+/body>
+/html>
